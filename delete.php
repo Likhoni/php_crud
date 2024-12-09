@@ -7,4 +7,4 @@ if(mysqli_query($conn , $sql)){
 }else{
     echo "Something went wrong, Please try again later.";
 }
-?>
+?> 

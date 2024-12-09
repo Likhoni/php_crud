@@ -2,18 +2,20 @@
 require_once "conn.php";
 
 if (isset($_POST["name"]) && isset($_POST["mobile_number"]) && isset($_GET["id"])) {
-    $name = $_POST['name'];
-    $mobile_number = $_POST['mobile_number'];
-    $id = $_POST['id'];
+    $name = mysqli_real_escape_string($conn, $_POST['name']);
+    $mobile_number = mysqli_real_escape_string($conn, $_POST['mobile_number']);
+    $id = intval($_GET['id']); 
 
     $sql = "UPDATE students SET `name` = '$name', `mobile_number` = '$mobile_number' WHERE id = $id";
-    
+
     if (mysqli_query($conn, $sql)) {
-        header("location: index.php");
-        exit; 
+        header("Location: index.php"); 
+        exit;
     } else {
         echo "Something went wrong. Please try again later.";
     }
+} else {
+    echo "Required data is missing.";
 }
 ?>
 
